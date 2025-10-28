@@ -2,49 +2,41 @@ name: Flutter CI
 
 on:
   push:
-    branches:
-      - '**'     # Run on all branches
+    branches: ["**"]
   pull_request:
-    branches:
-      - '**'     # Run on all branches
+    branches: ["**"]
 
 jobs:
   build:
-    name: Run Flutter app (catalogue_app)
     runs-on: ubuntu-latest
-
-    defaults:
-      run:
-        working-directory: catalogue_app
+    name: Flutter build (catalogue_app)
 
     steps:
-      # 1️⃣ Checkout the repository
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 2️⃣ Install Flutter
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.24.0'   # adapt to your version
+          flutter-version: '3.24.0'
           channel: 'stable'
 
-      # 3️⃣ Verify Flutter installation
-      - name: Check Flutter version
+      - name: Verify Flutter installation
         run: flutter --version
 
-      # 4️⃣ Install project dependencies
+      # Move into the project directory before running any flutter commands
       - name: Get dependencies
+        working-directory: catalogue_app
         run: flutter pub get
 
-      # 5️⃣ Analyze code for errors
       - name: Analyze code
+        working-directory: catalogue_app
         run: flutter analyze
 
-      # 6️⃣ Run tests (if any)
       - name: Run tests
+        working-directory: catalogue_app
         run: flutter test
 
-      # 7️⃣ Build Android APK (optional)
       - name: Build APK
+        working-directory: catalogue_app
         run: flutter build apk --debug
