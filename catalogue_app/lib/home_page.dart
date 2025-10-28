@@ -13,7 +13,7 @@ class HomePage extends StatelessWidget {
   final List<Product> products = [
     Product('Laptop HP', 9000, 'Ordinateur portable 16 Go RAM'),
     Product('iPhone 15', 15000, 'Smartphone dernière génération'),
-    Product('Casque JBL', 800, 'Casque sans fil Bluetooth'),
+    Product('Casque ', 800, 'Casque sans fil Bluetooth'),
   ];
 
   @override
